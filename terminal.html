@@ -48,7 +48,7 @@ C:\AetherUniverse\Archive_Delta-1011.bat>
 
 <script>
 
-const correctPassword = "password 7122D3-BLOCK";
+const correctPassword = "password trust me";
 const dumbTrigger = "password *password*";
 
 let ipAddress="";
@@ -139,7 +139,7 @@ function updateColorByAttempts(attempts){
 function ban10Seconds(){
     localStorage.setItem(
         blockKey,
-        (Date.now()+10000).toString()
+        (Date.now()+600000).toString()
     );
     checkBlockStatus();
 }
