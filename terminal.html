@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Secure Console</title>
+
+<style>
+
+body{
+    margin:0;
+    background:black;
+    color:#00ff00;
+    font-family:Consolas, monospace;
+    padding:40px;
+}
+
+#consoleInput{
+    background:black;
+    border:none;
+    outline:none;
+    color:#00ff00;
+    font-family:Consolas, monospace;
+    font-size:16px;
+    width:80%;
+}
+
+#error{
+    white-space: pre-line;
+    margin-top:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div>
+C:\AetherCore\Delta-1011> access_log.exe<br>
+Access restricted.<br><br>
+</div>
+
+<div>
+C:\AetherCore\Delta-1011>
+<input type="text" id="consoleInput" autocomplete="off">
+</div>
+
+<div id="error"></div>
+
+<script>
+
+const correctPassword = "password 7122D3-BLOCK";
+const dumbTrigger = "password *password*";
+
+let ipAddress="";
+let blockKey="";
+let attemptsKey="";
+
+const input=document.getElementById("consoleInput");
+const error=document.getElementById("error");
+
+/* IP */
+
+async function getIP(){
+    try{
+        const res=await fetch("https://api.ipify.org?format=json");
+        const data=await res.json();
+
+        ipAddress=data.ip;
+
+        blockKey="block_until_"+ipAddress;
+        attemptsKey="attempts_"+ipAddress;
+
+        if(!localStorage.getItem(attemptsKey))
+            localStorage.setItem(attemptsKey,"0");
+
+        showTutorial();
+        checkBlockStatus();
+
+    }catch(e){
+        console.log("IP error");
+    }
+}
+
+getIP();
+
+/* Tutorial */
+
+function showTutorial(){
+    error.style.color="lime";
+    error.innerText=`--- TERMINAL GUIDE ---
+Enter password to access archive.
+First wrong attempt is forgiven.
+Use format:
+password *password*`;
+}
+
+/* Block */
+
+function checkBlockStatus(){
+
+    const blockUntil=parseInt(localStorage.getItem(blockKey)||"0");
+
+    if(Date.now()<blockUntil){
+
+        input.disabled=true;
+
+        const timer=setInterval(()=>{
+
+            const remaining=Math.ceil((blockUntil-Date.now())/1000);
+
+            if(remaining<=0){
+                clearInterval(timer);
+                input.disabled=false;
+                error.innerText="";
+                return;
+            }
+
+            error.style.color="red";
+            error.innerText="Access restricted.\nWait "+remaining+" seconds";
+
+        },500);
+    }
+}
+
+/* Color */
+
+function updateColorByAttempts(attempts){
+
+    if(attempts===1)
+        error.style.color="rgb(0,255,0)";
+    else if(attempts===2)
+        error.style.color="orange";
+    else
+        error.style.color="red";
+}
+
+/* Ban */
+
+function ban10Seconds(){
+    localStorage.setItem(
+        blockKey,
+        (Date.now()+10000).toString()
+    );
+    checkBlockStatus();
+}
+
+/* Input */
+
+input.addEventListener("keydown",e=>{
+    if(e.key==="Enter")
+        checkPassword();
+});
+
+function checkPassword(){
+
+    const blockUntil=parseInt(localStorage.getItem(blockKey)||"0");
+    if(Date.now()<blockUntil) return;
+
+    const value=input.value.trim();
+
+    let attempts=parseInt(localStorage.getItem(attemptsKey)||"0");
+
+    /* Correct password */
+
+    if(value===correctPassword){
+        error.style.color="lime";
+        error.innerText="Access granted.";
+
+        setTimeout(()=>{
+            window.location.href="archive.php";
+        },1000);
+
+        return;
+    }
+
+    /* Dumb trigger */
+
+    if(value===dumbTrigger){
+        error.style.color="red";
+        error.innerText="you dumb";
+        ban10Seconds();
+        return;
+    }
+
+    /* First mistake free */
+
+    if(attempts===0){
+        localStorage.setItem(attemptsKey,"1");
+
+        error.innerText="Access restricted.\nAttempts left: 3";
+        error.style.color="rgb(0,255,0)";
+
+        input.value="";
+        return;
+    }
+
+    attempts++;
+    localStorage.setItem(attemptsKey,attempts.toString());
+
+    if(attempts>=4){
+        localStorage.setItem(attemptsKey,"0");
+        error.style.color="red";
+        error.innerText="Access restricted.";
+        ban10Seconds();
+        return;
+    }
+
+    const left=4-attempts;
+
+    updateColorByAttempts(attempts);
+
+    error.innerText=`Access restricted.
+Attempts left: ${left}`;
+
+    input.value="";
+}
+
+</script>
+
+</body>
+</html>
