@@ -1,1 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>AetherCore — Утечка данных</title>
 
+<style>
+
+body{
+    margin:0;
+    padding:60px 20px 100px;
+    background:#0a0a0a;
+    font-family:Consolas, monospace;
+    color:#e6e6e6;
+    cursor: default; /* ← обычный курсор */
+}
+
+/* Коробка документа */
+
+.box{
+    max-width:900px;
+    margin:auto;
+    background:#111;
+    padding:50px;
+    border:1px solid #2a2a2a;
+}
+
+/* Заголовок */
+
+.main-title{
+    font-size:26px;
+    margin-bottom:40px;
+}
+
+/* Секции */
+
+.section{
+    margin-top:40px;
+    font-size:18px;
+}
+
+/* Текст */
+
+p{
+    line-height:1.7;
+}
+
+.redacted{
+    color:#777;
+    letter-spacing:3px;
+}
+
+/* Скрытая информация */
+
+.hidden-info{
+    margin-top:15px;
+    display:none;
+    font-size:14px;
+    color:#ccc;
+    border-left:2px solid #444;
+    padding-left:15px;
+    line-height:1.5;
+}
+
+/* Нумерация страницы */
+
+.page-footer{
+    text-align:center;
+    margin-top:60px;
+    opacity:0.6;
+}
+
+.page-number{
+    margin-top:5px;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* Блок профиля */
+
+.profile-line{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.profile-question{
+    font-size:22px;
+    cursor:pointer;
+    color:#888;
+}
+
+.profile-question:hover{
+    color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<div class="main-title">
+ЛОР ПЕРСОНАЖА — ВНУТРЕННЯЯ УТЕЧКА ДАННЫХ
+</div>
+
+<div class="section">▬ AetherCore ▬</div>
+
+<p>
+По данным 4 блоков серверных архивов организация создана в 19<span class="redacted">░░</span>. Активна по настоящее время.
+</p>
+
+<p>
+Компания AetherCore — закрытый научно-исследовательский консорциум, занимающийся разработкой технологий когнитивной стабилизации, нейроинтерфейсов и цифровых моделей сознания.
+Финансирование проекта частично скрыто через сеть подставных исследовательских фондов.
+</p>
+
+<p>
+По информации перехваченных каналов связи в <span class="redacted">░░░░░░░ ░░:░░░</span> началась операция федерального наблюдения по делу AetherCore.
+Упоминание кодового имени «Запретный плод» связано с расследованием нелегального тестирования симуляционных технологий.
+</p>
+
+<p>
+Проект Delta-1011 — изолированная цифровая среда, предназначенная для экспериментов с долгосрочным сохранением личности.
+Технология позволяет переносить фрагменты нейронных паттернов испытуемых в закрытую вычислительную сеть.
+</p>
+
+<div class="section">▬ Nebraska ▬</div>
+
+<p>
+Объект 1238-B, кодовое имя Nebraska, является одним из испытуемых проекта Delta-1011.
+Уровень внутреннего доступа обозначен как Ω-class.
+</p>
+
+<p>
+Субъект утверждал, что сохранил частичное самосознание после помещения в симуляцию.
+Логи показывают попытки самостоятельного перемещения между вычислительными узлами системы.
+</p>
+
+<p>
+Nebraska идентифицируется как учёный, принудительно включённый в экспериментальную программу.
+Официальных записей о согласии на участие не обнаружено.
+</p>
+
+<p>
+Находится внутри симуляционной среды 214 дней.
+Физическое местоположение тела остаётся неизвестным.
+</p>
+
+<div class="section">Визуальный профиль субъекта</div>
+
+<div class="profile-line">
+<p style="margin:0;">
+До инцидента — человек в тёмном плаще с капюшоном.
+Рядом с фигурой постоянно фиксируется визуальный образ ворона, удерживающего подвешенный фонарь.
+</p>
+
+<div class="profile-question" onclick="toggleProfileInfo()">?</div>
+</div>
+
+<div id="profileExtra" class="hidden-info">
+Сведения были найдены в папке иллюстративных изображений испытуемых.
+</div>
+
+<p><strong>Рут-<span class="redacted">░░░</span>в <span class="redacted">░░░░░░░</span>аточн<span class="redacted">░</span> для по<span class="redacted">░░░░</span>я симул<span class="redacted">░░░░░░░</span>.</strong></p>
+
+<p>
+После события <span class="redacted">░░░░░░░</span> кодовое обозначение Nebraska было удалено из части архивных журналов.
+</p>
+
+<p>
+В новостных сводках используется формулировка «Агент Nebraska — скрытый наблюдатель».
+</p>
+
+<p>
+Ворон с фонарём рассматривается как индикатор целостности вычислительной среды.
+Полное исчезновение сигнатуры фонаря может означать коллапс симуляционного слоя.
+</p>
+
+<p>
+AetherCore официально заявляет об отсутствии незаконных экспериментов.
+Юридическое давление со стороны государственных структур продолжает фиксироваться аналитическими узлами.
+</p>
+
+</div>
+
+<div class="page-footer">
+<div>СТРАНИЦА</div>
+<div class="page-number" id="pageNumber">01</div>
+</div>
+
+<script>
+
+/* Показать / скрыть профильную информацию */
+
+function toggleProfileInfo(){
+    let block = document.getElementById("profileExtra");
+
+    if(block.style.display === "block"){
+        block.style.display = "none";
+    }else{
+        block.style.display = "block";
+    }
+}
+
+/* 4 клика → терминал */
+
+let clicks = 0;
+
+document.getElementById("pageNumber").onclick = function(){
+    clicks++;
+
+    if(clicks === 4){
+        window.location.href = "terminal.html";
+    }
+};
+
+</script>
+
+</body>
+</html>
