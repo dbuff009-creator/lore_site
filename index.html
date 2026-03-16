@@ -5,94 +5,156 @@
 <title>Кто же ты, Небраска \\ АРХИВ ФАЙЛ 1082</title>
 
 <style>
+/* Эффект старого ЭЛТ-монитора */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
 
-body{
+body {
     margin:0;
     padding:60px 20px 100px;
-    background:#0a0a0a;
-    font-family:Consolas, monospace;
-    color:#e6e6e6;
-    cursor: default;
+    background:#050505;
+    font-family: 'Courier New', Consolas, monospace;
+    color:#d4d4d4;
+    cursor: text;
+    overflow-x: hidden;
 }
 
 /* Коробка документа */
-
-.box{
+.box {
     max-width:900px;
     margin:auto;
-    background:#111;
+    background:#0a0a0a;
     padding:50px;
-    border:1px solid #2a2a2a;
+    border:1px solid #1a1a1a;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.05);
+    position: relative;
+    z-index: 1;
 }
 
-/* Заголовок */
-
-.main-title{
+/* Заголовок с легким глитчем */
+.main-title {
     font-size:26px;
     margin-bottom:40px;
+    color: #fff;
+    text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5);
+    animation: glitch 3s infinite alternate;
 }
 
 /* Секции */
-
-.section{
+.section {
     margin-top:40px;
     font-size:18px;
+    color: #888;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
 }
 
 /* Текст */
-
-p{
+p {
     line-height:1.7;
 }
 
-.redacted{
-    color:#777;
+/* Цензура: теперь при наведении чуть-чуть просвечивает текст (но не полностью) */
+.redacted {
+    background-color: #d4d4d4;
+    color: #d4d4d4;
     letter-spacing:1px;
+    user-select: none;
+    transition: all 0.2s;
+}
+
+.redacted:hover {
+    background-color: #555;
+    color: #111;
+    cursor: help;
 }
 
 /* Скрытая информация */
-
-.hidden-info{
+.hidden-info {
     margin-top:15px;
     display:none;
     font-size:14px;
-    color:#ccc;
-    border-left:2px solid #444;
+    color:#999;
+    border-left:2px solid #500;
     padding-left:15px;
     line-height:1.5;
 }
 
-/* Нумерация страницы */
+/* Текст-призрак (видно только при выделении) */
+.ghost-text {
+    color: #0a0a0a; /* Сливается с фоном .box */
+    user-select: text;
+}
 
-.page-footer{
+.ghost-text::selection {
+    background-color: #444;
+    color: #fff;
+}
+
+/* Нумерация страницы */
+.page-footer {
     text-align:center;
     margin-top:60px;
     opacity:0.6;
+    z-index: 1;
+    position: relative;
 }
 
-.page-number{
+.page-number {
     margin-top:5px;
     font-size:18px;
-    cursor: default;
+    cursor: pointer;
+    display: inline-block;
 }
 
 /* Блок профиля */
-
-.profile-line{
+.profile-line {
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap:20px;
 }
 
-.profile-question{
+.profile-question {
     font-size:22px;
     cursor:pointer;
-    color:#888;
+    color:#555;
+    font-weight: bold;
 }
 
-.profile-question:hover{
-    color:white;
+.profile-question:hover {
+    color: red;
+    text-shadow: 0 0 5px red;
+}
+
+/* Анимации */
+@keyframes glitch {
+    0% { text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
+    14% { text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
+    15% { text-shadow: -2px 0 0 rgba(255,0,0,0.5), 2px 0 0 rgba(0,255,255,0.5); }
+    49% { text-shadow: -2px 0 0 rgba(255,0,0,0.5), 2px 0 0 rgba(0,255,255,0.5); }
+    50% { text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
+    100% { text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
+}
+
+.flicker {
+    animation: text-flicker 4s linear infinite;
+}
+
+@keyframes text-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 22%, 24%, 55% { opacity: 0; }
 }
 
 </style>
@@ -100,14 +162,20 @@ p{
 
 <body>
 
+<!-- 
+    SYS_LOG: Попытка восстановления сектора 4... ПРОВАЛЕНО.
+    SYS_LOG: Найдены остаточные фрагменты аудиозаписи 11-B.
+    QkFTRTY0OiBWRzhnY0dWeWMyOWhiQ0IzYjNWMGFHMXBiQ0J6YVc1bElHMWxaR2x1WVM1emFHOXVaM1ZzWlhKekwzQmxiR3g1
+-->
+
 <div class="box">
 
 <div class="main-title">
-Файловый архив №1082
+Файловый архив №1082 <span class="flicker">_</span>
 </div>
 
 <p>
-    я <span class="redacted">█████████████████████</span> руководитель <span class="redacted">███████████████████</span>, по раследованнию в сфере <span class="redacted">██████████████</span>, 
+    я <span class="redacted">Доктор Р. Лэнгдон</span> руководитель <span class="redacted">отдела D-4</span>, по расследованию в сфере <span class="redacted">аномальных ЧС</span>, 
     предоставляю данный архив в общедос- т - тт... __ __ который с- сможет увидет- т-т---- каж- каж- дый___
 </p>
     
@@ -115,11 +183,11 @@ p{
 
 <p>
 Большая часть архивов о компании - 
-<span class="redacted">████████████████████████████████████████</span>
+<span class="redacted">стерта по протоколу очистки "Забвение"</span>
 была удалена или утеряна.
 </p>
 
-    
+<!-- Если они читают это, Aether всё ещё существует. -->
 
 <p>
 В общедоступной информации упоминается руководитель:
@@ -128,7 +196,8 @@ p{
 
 <p>
 Любая дополнительная информация
-<span class="redacted">█████████████████████████</span>.
+<span class="redacted">засекречена до 2038 года</span>.
+<span class="ghost-text">Он не тот, за кого себя выдает. Посмотри на его руки на фото 4.</span>
 </p>
 
 <div class="section">▬ Nebraska ▬</div>
@@ -140,43 +209,48 @@ p{
 
 <p>
 Статус:
-сотрудник компании <strong>Aether</strong>.
+сотрудник компании <strong class="flicker">Aether</strong>.
 </p>
 
 <p>
 Остальные сведения о субъекте - 
-<span class="redacted">██████████████████████████████████████████████████</span>.
+<span class="redacted">изъяты из базы данных после Инцидента 09</span>.
 </p>
 
 <p>
 Личные данные - 
-<span class="redacted">█████████████████████████████████████████████████████████████████</span>.
+<span class="redacted">Субъект не имеет биологических родителей в привычном понимании</span>.
 </p>
 
 <p>
 Информация о проекте - 
-<span class="redacted">████████████████████████████████████████</span>.
+<span class="redacted">Эксперимент по переносу сознания в неорганический носитель</span>.
 </p>
 
 <div class="section">Визуальный профиль субъекта - </div>
 
 <div class="profile-line">
 <p>
-не чел
-<span class="redacted">██████ █████████████  █████████████   ██████████</span> 
-<span class="redacted">████████████████████████████████████████████████████████████</span> <span class="redacted">████████████████████████████████████████</span> фонарь.
+не чел<span class="ghost-text">овек</span>
+<span class="redacted">Тело</span> 
+<span class="redacted">состоит из неизвестного сплава. На месте головы установлен</span> <span class="redacted">промышленный галогеновый</span> фонарь.
 </p>
 
 <div class="profile-question" onclick="toggleProfileInfo()">?</div>
 </div>
 
 <div id="profileExtra" class="hidden-info">
-Сведения были найдены в папке иллюстративных изображений испытуемых.
+Сведения были найдены в папке иллюстративных изображений испытуемых. <br>
+<span style="font-family: monospace; color: #500;">ФАЙЛ ПОВРЕЖДЕН: "Оно светит даже когда отключено от сети".</span>
 </div>
 
 <p>
 Большинство документов, связанных с Nebraska - 
 <span class="redacted">Ведутся поиски</span>.
+</p>
+
+<p class="ghost-text">
+01001000 01100101 01101100 01110000 00100000 01101101 01100101
 </p>
 
 </div>
@@ -187,6 +261,10 @@ p{
 </div>
 
 <script>
+// Пасхалка в консоли разработчика (F12)
+console.log("%c[СИСТЕМНОЕ ПРЕДУПРЕЖДЕНИЕ]", "color: red; font-size: 24px; font-weight: bold;");
+console.log("%cОбнаружено несанкционированное подключение. Ваш IP-адрес записан.", "color: #ff5555; font-size: 16px;");
+console.log("%cИщите глубже. Не доверяйте J.W.", "color: #555; font-size: 12px; font-style: italic;");
 
 function toggleProfileInfo(){
     let block = document.getElementById("profileExtra");
@@ -195,19 +273,41 @@ function toggleProfileInfo(){
         block.style.display = "none";
     }else{
         block.style.display = "block";
+        // Маленький жуткий эффект в консоли при открытии подсказки
+        console.warn("Файл 1082_img.jpg не найден. Вы уверены, что хотите знать?");
     }
 }
 
 let clicks = 0;
+const pageNum = document.getElementById("pageNumber");
 
-document.getElementById("pageNumber").onclick = function(){
+pageNum.onclick = function(){
     clicks++;
+    
+    // Эффект глитча при клике на номер страницы
+    pageNum.style.color = "red";
+    pageNum.innerText = "0" + (1 + clicks) + " ERROR";
+    setTimeout(() => {
+        pageNum.style.color = "";
+        pageNum.innerText = "01";
+    }, 150);
+
+    if(clicks === 1) {
+        console.log("Доступ 1/4");
+    } else if (clicks === 2) {
+        console.log("Доступ 2/4. Система фиксирует попытку взлома.");
+    } else if (clicks === 3) {
+        console.log("Доступ 3/4. ОСТАНОВИТЕСЬ.");
+    }
 
     if(clicks === 4){
-        window.location.href = "terminal.html";
+        // Вместо моментального перехода, делаем "поломку" страницы перед редиректом
+        document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%; font-family:monospace;'>ПЕРЕАДРЕСАЦИЯ НА ТЕРМИНАЛ...</h1>";
+        setTimeout(() => {
+            window.location.href = "terminal.html";
+        }, 1500);
     }
 };
-
 </script>
 
 </body>
