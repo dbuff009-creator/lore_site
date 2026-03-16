@@ -2,251 +2,368 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Кто же ты, Небраска \\ АРХИВ ФАЙЛ 1082</title>
+<title>АРХИВ // 1082</title>
 
 <style>
+/* Максимально глубокий и чистый темный фон */
 body {
-    margin:0;
-    padding:60px 20px 100px;
-    background:#050505;
-    font-family: 'Courier New', Consolas, monospace;
-    color:#d4d4d4;
+    margin: 0;
+    padding: 60px 20px;
+    background-color: #09090b; 
+    font-family: 'Consolas', 'Menlo', 'Monaco', 'Courier New', monospace;
+    color: #c4c4c4; 
     cursor: text;
-    overflow-x: hidden;
 }
 
-/* Коробка документа */
+/* Сам лист документа */
 .box {
-    max-width:900px;
-    margin:auto;
-    background:#0a0a0a;
-    padding:50px;
-    border:1px solid #1a1a1a;
+    max-width: 820px;
+    margin: auto;
+    background-color: #121214; 
+    padding: 70px 90px;
+    border: 1px solid #222225;
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     position: relative;
-    z-index: 1;
 }
 
-/* Заголовок */
+/* Строгий системный гриф */
+.classified-stamp {
+    position: absolute;
+    top: 50px;
+    right: 70px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666666;
+    border: 1px solid #333333;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Главный заголовок */
 .main-title {
-    font-size:26px;
-    margin-bottom:40px;
-    color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    font-size: 22px; 
+    font-weight: bold;
+    color: #ffffff; 
+    margin-bottom: 50px;
+    border-bottom: 1px solid #2a2a2a;
+    padding-bottom: 15px;
+    letter-spacing: 1.5px;
+}
+
+/* Подзаголовки секций с градиентом */
+.section {
+    margin-top: 90px; 
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    font-size: 14px; 
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #222225 0%, transparent 100%);
+    border-left: 3px solid #777777; 
+    padding: 6px 12px; 
+}
+
+/* Основной текст с интервалом 1.4 */
+p {
+    line-height: 1.4; 
+    font-size: 16px; 
+    margin-bottom: 24px;
+    text-align: left; 
+    letter-spacing: 0.3px; 
+}
+
+/* Выделение ключей (слов перед двоеточием) */
+.label {
+    display: inline;
+    color: #888888;
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    font-size: 15px;
+    border-bottom: 1px dotted #444444; 
+    margin-right: 5px;
+}
+
+/* Кубик-печать для имени в тексте */
+.name-stamp {
+    display: inline-block;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    border: 1px solid #555555;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: #0d0d0f;
+    vertical-align: middle; 
+}
+
+/* Важные слова */
+strong {
+    color: #ffffff;
     font-weight: bold;
 }
 
-/* Секции */
-.section {
-    margin-top:40px;
-    font-size:18px;
-    color: #888;
-    border-bottom: 1px solid #333;
-    padding-bottom: 5px;
-}
-
-/* Текст */
-p {
-    line-height:1.7;
-}
-
-/* Цензура: при наведении чуть-чуть просвечивает текст */
+/* БЕЛАЯ ЦЕНЗУРА */
 .redacted {
-    background-color: #d4d4d4;
-    color: #d4d4d4;
-    letter-spacing:1px;
+    background-color: #ffffff;
+    color: #ffffff;
     user-select: none;
-    transition: all 0.2s;
+    cursor: default;
+    padding: 0 5px;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(255,255,255,0.1);
 }
 
-.redacted:hover {
-    background-color: #555;
-    color: #111;
+.redacted.revealable {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.redacted.revealable:hover {
+    background-color: #e0e0e0; 
+    color: #000000;
     cursor: help;
 }
 
-/* Скрытая информация */
-.hidden-info {
-    margin-top:15px;
-    display:none;
-    font-size:14px;
-    color:#999;
-    border-left:2px solid #500;
-    padding-left:15px;
-    line-height:1.5;
+/* --- ЭКСТРЕМАЛЬНОЕ СЖАТИЕ ДАННЫХ --- */
+.data-compression {
+    display: inline-block;
+    font-family: 'Consolas', monospace;
+    font-size: 15px;
+    color: #666666; 
+    text-transform: uppercase; 
+    letter-spacing: -4.8px; 
+    word-spacing: 2px; 
+    transform: scaleX(1.15);
+    transform-origin: left;
+    user-select: none; 
 }
 
-/* Текст-призрак (сливается с фоном, видно только при выделении) */
+/* Скрытая информация (сноска) */
+.hidden-info {
+    margin-top: 15px;
+    display: none;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #888888;
+    border-left: 2px solid #555555;
+    padding-left: 20px;
+    background: #18181a;
+    padding: 15px 20px;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Текст-призрак */
 .ghost-text {
-    color: #0a0a0a; 
+    color: #121214; 
     user-select: text;
+}
+
+::selection {
+    background-color: #ffffff;
+    color: #000000;
 }
 
 /* Нумерация страницы */
 .page-footer {
-    text-align:center;
-    margin-top:60px;
-    opacity:0.6;
-    z-index: 1;
-    position: relative;
+    text-align: right;
+    margin-top: 100px; 
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 13px;
+    color: #555555;
+    border-top: 1px solid #222225;
+    padding-top: 20px;
+    letter-spacing: 1px;
 }
 
-/* Курсор обычный, чтобы не было понятно, что это кнопка */
 .page-number {
-    margin-top:5px;
-    font-size:18px;
-    cursor: text; 
+    cursor: text; /* Обычный курсор для скрытности */
     display: inline-block;
+    color: #999999;
+    font-weight: bold;
 }
 
-/* Блок профиля */
+/* Кнопка сноски */
 .profile-line {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
 }
 
 .profile-question {
-    font-size:22px;
-    cursor:pointer;
-    color:#555;
+    font-size: 12px;
+    font-family: 'Segoe UI', Arial, sans-serif;
     font-weight: bold;
-    transition: color 0.2s;
+    cursor: pointer;
+    color: #888888;
+    border: 1px solid #444444;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: all 0.2s;
+    text-transform: uppercase;
 }
 
 .profile-question:hover {
-    color: #cc0000;
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
 }
 </style>
 </head>
 
 <body>
 
-<!-- 
-    SYS_LOG: Попытка восстановления сектора 4... ПРОВАЛЕНО.
-    SYS_LOG: Найдены остаточные фрагменты аудиозаписи 11-B.
-    QkFTRTY0OiBWRzhnY0dWeWMyOWhiQ0IzYjNWMGFHMXBiQ0J6YVc1bElHMWxaR2x1WVM1emFHOXVaM1ZzWlhKekwzQmxiR3g1
--->
-
 <div class="box">
 
+<div class="classified-stamp">УРОВЕНЬ ДОСТУПА 1</div>
+
 <div class="main-title">
-Файловый архив №1082 _
+ФАЙЛОВЫЙ АРХИВ №1082
 </div>
 
 <p>
-    я <span class="redacted">Доктор Р. Лэнгдон</span> руководитель <span class="redacted">отдела D-4</span>, по расследованию в сфере <span class="redacted">аномальных ЧС</span>, 
-    предоставляю данный архив в общедос- т - тт... __ __ который с- сможет увидет- т-т---- каж- каж- дый___
+    Я, <span class="redacted">Доктор Р. Лэнгдон</span>, руководитель <span class="redacted">отдела D-4</span> по расследованию в сфере <span class="redacted">аномальных ЧС</span>, 
+    предоставляю данный архив в 
+    <span class="data-compression">общедоступный реестр. Вся информация в данном архиве предназначена для ознакомления.</span>
 </p>
     
-<div class="section">▬ Aether ▬</div>
+<div class="section">Объект: Aether</div>
 
 <p>
-Большая часть архивов о компании - 
+Большая часть архивов о компании 
 <span class="redacted">стерта по протоколу очистки "Забвение"</span>
 была удалена или утеряна.
 </p>
 
-<!-- Если они читают это, Aether всё ещё существует. -->
-
 <p>
-В общедоступной информации упоминается руководитель:
-<strong>Джо. Вандерсон. Ш.</strong>
+<span class="label">Руководитель в общедоступной информации:</span> 
+<span class="name-stamp">Джо. Вандерсон. Ш.</span>
 </p>
 
 <p>
-Любая дополнительная информация
+<span class="label">Дополнительная информация:</span>
 <span class="redacted">засекречена до 2038 года</span>.
 <span class="ghost-text">Он не тот, за кого себя выдает. Посмотри на его руки на фото 4.</span>
 </p>
 
-<div class="section">▬ Nebraska ▬</div>
+<div class="section">Субъект: Nebraska</div>
 
 <p>
-В архивных логах встречается обозначение
+<span class="label">В архивных логах встречается обозначение:</span>
 <strong>Nebraska</strong>.
 </p>
 
 <p>
-Статус:
+<span class="label">Статус:</span>
 сотрудник компании <strong>Aether</strong>.
 </p>
 
 <p>
-Остальные сведения о субъекте - 
+<span class="label">Остальные сведения о субъекте:</span> 
 <span class="redacted">изъяты из базы данных после Инцидента 09</span>.
 </p>
 
 <p>
-Личные данные - 
+<span class="label">Личные данные:</span> 
 <span class="redacted">Субъект не имеет биологических родителей в привычном понимании</span>.
 </p>
 
 <p>
-Информация о проекте - 
-<span class="redacted">Эксперимент по переносу сознания в неорганический носитель</span>.
+<span class="label">Информация о проекте:</span> 
+<span class="redacted revealable">Перенос объекта с молекулярного его определяющего измерения в транспаляцию симуляции подкрепленной управлением</span>.
 </p>
 
-<div class="section">Визуальный профиль субъекта - </div>
+<div class="section">Визуальный профиль</div>
 
 <div class="profile-line">
 <p>
-не чел<span class="ghost-text">овек</span>
+<strong style="color: #ffffff;">Не чел</strong><span class="ghost-text">овек</span>.
 <span class="redacted">Тело</span> 
 <span class="redacted">состоит из неизвестного сплава. На месте головы установлен</span> <span class="redacted">промышленный галогеновый</span> фонарь.
 </p>
 
-<div class="profile-question" onclick="toggleProfileInfo()">?</div>
+<div class="profile-question" onclick="toggleProfileInfo()">СНОСКА</div>
 </div>
 
 <div id="profileExtra" class="hidden-info">
-Сведения были найдены в папке иллюстративных изображений испытуемых. <br>
-<span style="font-family: monospace; color: #cc0000;">ФАЙЛ ПОВРЕЖДЕН: "Оно светит даже когда отключено от сети".</span>
+Сведения были найдены в папке иллюстративных изображений испытуемых.
 </div>
 
-<p>
-Большинство документов, связанных с Nebraska - 
+<p style="margin-top: 40px;">
+<span class="label">Документы, связанные с субъектом Nebraska:</span> 
 <span class="redacted">Ведутся поиски</span>.
 </p>
 
-<p class="ghost-text">
-01001000 01100101 01101100 01110000 00100000 01101101 01100101
-</p>
-
+<div class="page-footer">
+    СТРАНИЦА <div class="page-number" id="pageNumber">01</div>
 </div>
 
-<div class="page-footer">
-<div>СТРАНИЦА</div>
-<div class="page-number" id="pageNumber">01</div>
 </div>
 
 <script>
-// Пасхалка в консоли разработчика (F12)
-console.log("%c[СИСТЕМНОЕ ПРЕДУПРЕЖДЕНИЕ]", "color: #cc0000; font-size: 24px; font-weight: bold;");
-console.log("%cОбнаружено несанкционированное подключение. Ваш IP-адрес записан.", "color: #ff5555; font-size: 16px;");
-console.log("%cИщите глубже. Не доверяйте J.W.", "color: #555; font-size: 12px; font-style: italic;");
+console.log("%c[СИСТЕМА БЕЗОПАСНОСТИ AETHER]", "color: #aaaaaa; font-weight: bold; font-size: 14px;");
+console.log("Доступ к файлу 1082 залогирован.");
+console.log("%cИщите глубже. Не доверяйте J.W.", "color: #555555; font-style: italic;");
 
 function toggleProfileInfo(){
     let block = document.getElementById("profileExtra");
-
     if(block.style.display === "block"){
         block.style.display = "none";
     }else{
         block.style.display = "block";
-        console.warn("Файл 1082_img.jpg не найден. Вы уверены, что хотите знать?");
     }
 }
 
-// Секретный переход без видимых счетчиков и подсказок
+// Секретный переход (3 клика по номеру страницы)
 let clicks = 0;
 document.getElementById("pageNumber").onclick = function(){
     clicks++;
 
-    if(clicks === 4){
-        // Тот самый красный экран с переадресацией
-        document.body.innerHTML = "<h1 style='color:#cc0000; text-align:center; margin-top:20%; font-family:monospace;'>ПЕРЕАДРЕСАЦИЯ НА ТЕРМИНАЛ...</h1>";
-        setTimeout(() => {
-            window.location.href = "terminal.html";
-        }, 1500);
+    if(clicks === 3){
+        // Стильный переход: чисто черный экран, сканлайны и красная печать текста
+        document.body.innerHTML = `
+        <div style="background: #000000; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; font-family: 'Consolas', monospace; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            
+            <!-- Легкая текстура старого монитора -->
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); pointer-events: none; z-index: 2;"></div>
+
+            <!-- Текст и мигающий курсор -->
+            <div style="color: #ff2a2a; font-size: 20px; letter-spacing: 2px; text-shadow: 0 0 8px rgba(255, 42, 42, 0.6); z-index: 3;">
+                <span id="term-text"></span><span style="animation: cursorBlink 1s step-end infinite;">_</span>
+            </div>
+
+            <style>
+                @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+                body { overflow: hidden; } /* Блокируем скролл */
+            </style>
+        </div>`;
+        
+        let text = "Переход в терминал...";
+        let i = 0;
+        let speed = 50; // Скорость появления букв (мс)
+        
+        // Функция печати текста
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("term-text").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Как только напечатало, ждем секунду и перенаправляем
+                setTimeout(() => {
+                    window.location.href = "terminal.html";
+                }, 800);
+            }
+        }
+        
+        // Микрозадержка перед стартом печати, чтобы создать эффект загрузки консоли
+        setTimeout(typeWriter, 400); 
     }
 };
 </script>
