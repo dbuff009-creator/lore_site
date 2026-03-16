@@ -5,21 +5,6 @@
 <title>Кто же ты, Небраска \\ АРХИВ ФАЙЛ 1082</title>
 
 <style>
-/* Эффект старого ЭЛТ-монитора */
-body::before {
-    content: " ";
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 2;
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
-}
-
 body {
     margin:0;
     padding:60px 20px 100px;
@@ -37,18 +22,16 @@ body {
     background:#0a0a0a;
     padding:50px;
     border:1px solid #1a1a1a;
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.05);
     position: relative;
     z-index: 1;
 }
 
-/* Заголовок с легким глитчем */
+/* Заголовок */
 .main-title {
     font-size:26px;
     margin-bottom:40px;
     color: #fff;
-    text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5);
-    animation: glitch 3s infinite alternate;
+    font-weight: bold;
 }
 
 /* Секции */
@@ -65,7 +48,7 @@ p {
     line-height:1.7;
 }
 
-/* Цензура: теперь при наведении чуть-чуть просвечивает текст (но не полностью) */
+/* Цензура: при наведении чуть-чуть просвечивает текст */
 .redacted {
     background-color: #d4d4d4;
     color: #d4d4d4;
@@ -91,7 +74,7 @@ p {
     line-height:1.5;
 }
 
-/* Текст-призрак (видно только при выделении) */
+/* Текст-призрак (видно только при выделении мышью) */
 .ghost-text {
     color: #0a0a0a; /* Сливается с фоном .box */
     user-select: text;
@@ -111,10 +94,11 @@ p {
     position: relative;
 }
 
+/* Убрали курсор и эффекты при наведении, чтобы скрыть секрет */
 .page-number {
     margin-top:5px;
     font-size:18px;
-    cursor: pointer;
+    cursor: text; 
     display: inline-block;
 }
 
@@ -131,32 +115,12 @@ p {
     cursor:pointer;
     color:#555;
     font-weight: bold;
+    transition: color 0.2s;
 }
 
 .profile-question:hover {
-    color: red;
-    text-shadow: 0 0 5px red;
+    color: #cc0000;
 }
-
-/* Анимации */
-@keyframes glitch {
-    0% { text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
-    14% { text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
-    15% { text-shadow: -2px 0 0 rgba(255,0,0,0.5), 2px 0 0 rgba(0,255,255,0.5); }
-    49% { text-shadow: -2px 0 0 rgba(255,0,0,0.5), 2px 0 0 rgba(0,255,255,0.5); }
-    50% { text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
-    100% { text-shadow: 2px 0 0 rgba(255,0,0,0.5), -2px 0 0 rgba(0,255,255,0.5); }
-}
-
-.flicker {
-    animation: text-flicker 4s linear infinite;
-}
-
-@keyframes text-flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-    20%, 22%, 24%, 55% { opacity: 0; }
-}
-
 </style>
 </head>
 
@@ -171,7 +135,7 @@ p {
 <div class="box">
 
 <div class="main-title">
-Файловый архив №1082 <span class="flicker">_</span>
+Файловый архив №1082 _
 </div>
 
 <p>
@@ -209,7 +173,7 @@ p {
 
 <p>
 Статус:
-сотрудник компании <strong class="flicker">Aether</strong>.
+сотрудник компании <strong>Aether</strong>.
 </p>
 
 <p>
@@ -241,7 +205,7 @@ p {
 
 <div id="profileExtra" class="hidden-info">
 Сведения были найдены в папке иллюстративных изображений испытуемых. <br>
-<span style="font-family: monospace; color: #500;">ФАЙЛ ПОВРЕЖДЕН: "Оно светит даже когда отключено от сети".</span>
+<span style="font-family: monospace; color: #cc0000;">ФАЙЛ ПОВРЕЖДЕН: "Оно светит даже когда отключено от сети".</span>
 </div>
 
 <p>
@@ -262,7 +226,7 @@ p {
 
 <script>
 // Пасхалка в консоли разработчика (F12)
-console.log("%c[СИСТЕМНОЕ ПРЕДУПРЕЖДЕНИЕ]", "color: red; font-size: 24px; font-weight: bold;");
+console.log("%c[СИСТЕМНОЕ ПРЕДУПРЕЖДЕНИЕ]", "color: #cc0000; font-size: 24px; font-weight: bold;");
 console.log("%cОбнаружено несанкционированное подключение. Ваш IP-адрес записан.", "color: #ff5555; font-size: 16px;");
 console.log("%cИщите глубже. Не доверяйте J.W.", "color: #555; font-size: 12px; font-style: italic;");
 
@@ -273,39 +237,18 @@ function toggleProfileInfo(){
         block.style.display = "none";
     }else{
         block.style.display = "block";
-        // Маленький жуткий эффект в консоли при открытии подсказки
         console.warn("Файл 1082_img.jpg не найден. Вы уверены, что хотите знать?");
     }
 }
 
+// Абсолютно скрытая логика кликов по номеру страницы
 let clicks = 0;
-const pageNum = document.getElementById("pageNumber");
-
-pageNum.onclick = function(){
+document.getElementById("pageNumber").onclick = function(){
     clicks++;
-    
-    // Эффект глитча при клике на номер страницы
-    pageNum.style.color = "red";
-    pageNum.innerText = "0" + (1 + clicks) + " ERROR";
-    setTimeout(() => {
-        pageNum.style.color = "";
-        pageNum.innerText = "01";
-    }, 150);
 
-    if(clicks === 1) {
-        console.log("Доступ 1/4");
-    } else if (clicks === 2) {
-        console.log("Доступ 2/4. Система фиксирует попытку взлома.");
-    } else if (clicks === 3) {
-        console.log("Доступ 3/4. ОСТАНОВИТЕСЬ.");
-    }
-
+    // При достижении 4 кликов происходит моментальный и бесшумный переход
     if(clicks === 4){
-        // Вместо моментального перехода, делаем "поломку" страницы перед редиректом
-        document.body.innerHTML = "<h1 style='color:red; text-align:center; margin-top:20%; font-family:monospace;'>ПЕРЕАДРЕСАЦИЯ НА ТЕРМИНАЛ...</h1>";
-        setTimeout(() => {
-            window.location.href = "terminal.html";
-        }, 1500);
+        window.location.href = "terminal.html";
     }
 };
 </script>
