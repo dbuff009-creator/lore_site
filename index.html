@@ -74,15 +74,10 @@ p {
     line-height:1.5;
 }
 
-/* Текст-призрак (видно только при выделении мышью) */
+/* Текст-призрак (сливается с фоном, видно только при выделении) */
 .ghost-text {
-    color: #0a0a0a; /* Сливается с фоном .box */
+    color: #0a0a0a; 
     user-select: text;
-}
-
-.ghost-text::selection {
-    background-color: #444;
-    color: #fff;
 }
 
 /* Нумерация страницы */
@@ -94,7 +89,7 @@ p {
     position: relative;
 }
 
-/* Убрали курсор и эффекты при наведении, чтобы скрыть секрет */
+/* Курсор обычный, чтобы не было понятно, что это кнопка */
 .page-number {
     margin-top:5px;
     font-size:18px;
@@ -241,14 +236,17 @@ function toggleProfileInfo(){
     }
 }
 
-// Абсолютно скрытая логика кликов по номеру страницы
+// Секретный переход без видимых счетчиков и подсказок
 let clicks = 0;
 document.getElementById("pageNumber").onclick = function(){
     clicks++;
 
-    // При достижении 4 кликов происходит моментальный и бесшумный переход
     if(clicks === 4){
-        window.location.href = "terminal.html";
+        // Тот самый красный экран с переадресацией
+        document.body.innerHTML = "<h1 style='color:#cc0000; text-align:center; margin-top:20%; font-family:monospace;'>ПЕРЕАДРЕСАЦИЯ НА ТЕРМИНАЛ...</h1>";
+        setTimeout(() => {
+            window.location.href = "terminal.html";
+        }, 1500);
     }
 };
 </script>
